@@ -43,3 +43,32 @@ let showGallery =  arrGallery => {
 }
 
 showGallery(gallery);
+
+let findItem = arrGallery => {
+    const search = document.getElementById('myinput');
+
+    search.addEventListener('keyup', () => {
+       let text = search.value;
+
+       let filterArr = arrGallery.filter(function (item) {
+          if(item.itemName.toLowerCase().includes(text.toLowerCase())) {
+              return item.itemName;
+          }
+       })
+
+       if(this.value === "") {
+           showGallery(arrGallery);
+       } else {
+           if(filterArr === "") {
+               document.getElementById("para").innerHTML = "Поиск не найден!";
+               document.getElementById('card').innerHTML = "";
+           } else {
+               showGallery(filterArr);
+               document.getElementById('para').innerHTML = "";
+           }
+       }
+    });
+}
+
+findItem(gallery);
+
